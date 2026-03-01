@@ -17,5 +17,12 @@
       "run_at": "document_idle"
     }
   ],
-  "action": { "default_popup": "popup.html" }
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "justbird.png",
+      "48": "justbird.png",
+      "128": "justbird.png"
+    }
+  }
 }

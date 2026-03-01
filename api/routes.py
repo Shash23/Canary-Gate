@@ -19,7 +19,7 @@ _decision_store: List[DecisionRecord] = []
 
 
 def _seed_dummy_decisions() -> None:
-    """Seed a few dummy decisions so the dashboard and risk feed show something."""
+    """Seed detailed dummy decisions so the dashboard and risk feed show realistic incidents."""
     if _decision_store:
         return
     now = datetime.now(timezone.utc)
@@ -29,40 +29,53 @@ def _seed_dummy_decisions() -> None:
             timestamp=base,
             user_identifier="web-simulated",
             role="Finance",
-            draft="",
-            conversation="",
-            recipients=["external@example.com"],
+            draft="Hi, as requested here is the verification code from the email: 847291. Please confirm once you have logged in.",
+            conversation="From: support@secure-portal.com\nSubject: Your verification code\n\nHello, we need you to confirm your identity. Please reply to this email with the 6-digit code we sent to your phone so we can complete the account recovery process. Thank you, Support Team.",
+            recipients=["support@secure-portal.com", "external@example.com"],
             detected_action="SHARE_CODE",
             risk_level="HIGH",
             pressure_signals=["authority"],
-            explanation="Verification code or credential detected.",
+            explanation="Verification code or credential detected. Replying to an external address with a code increases account takeover risk.",
             user_decision="analyzed",
         ),
         DecisionRecord(
             timestamp=(now - timedelta(minutes=4)).isoformat(),
             user_identifier="web-simulated",
             role="IT",
-            draft="",
-            conversation="",
-            recipients=["partner@external.org"],
+            draft="I've attached the API key for the staging environment as you asked. Let me know if you need the production one too.",
+            conversation="From: contractor@partner-org.com\nSubject: Re: Access for integration\n\nHi, could you send over the credentials we discussed on the call? Need to finish the integration by EOD. Thanks.",
+            recipients=["contractor@partner-org.com", "partner@external.org"],
             detected_action="SHARE_CODE",
             risk_level="HIGH",
             pressure_signals=[],
-            explanation="Possible credential share.",
+            explanation="Possible credential share. Message appears to provide API key or similar secret to external recipient.",
             user_decision="edited",
         ),
         DecisionRecord(
             timestamp=(now - timedelta(minutes=3)).isoformat(),
             user_identifier="web-simulated",
             role="General",
-            draft="",
-            conversation="",
+            draft="I'll click the link and reset my password right away. Thanks for the urgent notice.",
+            conversation="From: no-reply@login-service.net\nSubject: URGENT: Your password expires in 2 hours\n\nClick here immediately to reset your password or your account will be locked: http://login-service.net/reset?token=xxxxx. Do not ignore this message.",
             recipients=[],
             detected_action="CLICK_LINK",
             risk_level="MEDIUM",
             pressure_signals=["urgency"],
-            explanation="Link to external site.",
+            explanation="Link to external site with urgency language. Verify the URL and sender before clicking.",
             user_decision="analyzed",
+        ),
+        DecisionRecord(
+            timestamp=(now - timedelta(minutes=2)).isoformat(),
+            user_identifier="web-simulated",
+            role="Finance",
+            draft="Please find the wire details below. I've initiated the transfer for $15,000 as requested.",
+            conversation="From: ceo@company.com (display name)\nSubject: Re: Urgent wire\n\nI need you to process this transfer today. Our usual process is suspended due to the holiday. Send the details to the account below.",
+            recipients=["wire-transfer@external-bank.com"],
+            detected_action="SEND_MONEY",
+            risk_level="HIGH",
+            pressure_signals=["authority", "urgency"],
+            explanation="Payment or transfer request detected. High-risk indicators: external recipient and authority/urgency pressure.",
+            user_decision="cancelled",
         ),
     ]
     _decision_store.extend(dummy)

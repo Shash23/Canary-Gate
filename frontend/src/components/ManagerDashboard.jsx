@@ -161,7 +161,9 @@ function ManagerDashboard({ onLogout }) {
         {/* Tier 2 — Incident alerts (no email body) */}
         <section className="manager-tier2">
           <h2 className="manager-section-title">Incident alerts</h2>
-          <p className="manager-tier2-hint">Security-relevant only. No names. Click HIGH severity for restricted investigation view.</p>
+          <p className="manager-tier2-hint">
+            {decisions.length} incident{decisions.length !== 1 ? 's' : ''} · Updates every 3s · Includes every analysis (extension + web). New extension runs appear here. Security-relevant only. No names. Click HIGH severity for restricted investigation view.
+          </p>
           <div className="manager-cards">
             {decisions.slice(0, 30).map((d, i) => {
               const isHigh = (d.risk_level || '').toUpperCase() === 'HIGH'
@@ -177,7 +179,7 @@ function ManagerDashboard({ onLogout }) {
                     : d.user_decision || '—'
               return (
                 <div
-                  key={i}
+                  key={`${d.timestamp || i}-${i}`}
                   className={`manager-card ${isHigh ? 'manager-card-high' : ''}`}
                   onClick={() => isHigh && setInvestigationRecord(d)}
                   role={isHigh ? 'button' : undefined}

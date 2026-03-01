@@ -79,6 +79,66 @@ body {
   white-space: pre-wrap;
 }
 
+.context-section {
+  display: none;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e8eaed;
+}
+
+.context-section.is-visible {
+  display: block;
+}
+
+.context-section h4 {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5f6368;
+}
+
+#contextSummary {
+  font-size: 13px;
+  color: #202124;
+  line-height: 1.45;
+  margin: 0;
+}
+
+#contextSummary ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+#contextSummary li {
+  margin-bottom: 4px;
+}
+
+.suggestion-section {
+  display: none;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e8eaed;
+}
+
+.suggestion-section.is-visible {
+  display: block;
+}
+
+.suggestion-section h4 {
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a7f37;
+}
+
+.suggestion-text {
+  margin: 0;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
 button {
   font-family: inherit;
   font-size: 14px;
@@ -105,6 +165,29 @@ button#toggleDetails {
 
 button#toggleDetails:hover {
   background: #f1f3f4;
+  color: #202124;
+}
+
+.detected-data-section {
+  display: none;
+  margin-bottom: 8px;
+}
+
+.detected-data-section.is-visible {
+  display: block;
+}
+
+.detected-data-section h4 {
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5f6368;
+}
+
+.detected-data-section ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 12px;
   color: #202124;
 }
 

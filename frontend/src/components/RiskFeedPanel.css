@@ -1,0 +1,79 @@
+.risk-feed-panel {
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.risk-feed-panel-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.risk-feed-panel-empty,
+.risk-feed-panel-error {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.risk-feed-panel-error {
+  color: #b91c1c;
+}
+
+.risk-feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.risk-feed-card {
+  padding: 0.75rem 1rem;
+  padding-left: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  border-left-width: 4px;
+  background: #fafbfc;
+}
+
+.risk-feed-card--info {
+  border-left-color: #2563eb;
+}
+
+.risk-feed-card--elevated {
+  border-left-color: #ea580c;
+}
+
+.risk-feed-card--critical {
+  border-left-color: #dc2626;
+}
+
+.risk-feed-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+}
+
+.risk-feed-card-desc {
+  font-size: 0.875rem;
+  color: #475569;
+  margin: 0 0 0.35rem 0;
+  line-height: 1.4;
+}
+
+.risk-feed-card-metrics {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0 0 0.25rem 0;
+}
+
+.risk-feed-card-time {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}

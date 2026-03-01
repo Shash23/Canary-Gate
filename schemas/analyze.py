@@ -47,9 +47,21 @@ class InterpretContextRequest(BaseModel):
     description: str = Field("", description="Human description of the communication situation")
 
 
+class SecurityContext(BaseModel):
+    """Structured situation context for popup display. Deterministic from analysis."""
+    conversation_summary: Optional[str] = Field(None, description="Brief summary of conversation context")
+    sender_intent: Optional[str] = Field(None, description="e.g. request_credentials, request_information")
+    relationship_type: Optional[str] = Field(None, description="e.g. internal, external")
+    conversation_risk_flags: List[str] = Field(default_factory=list, description="e.g. credential_request, urgency_language")
+    response_nature: Optional[str] = Field(None, description="e.g. providing_secret, providing_information")
+
+
 class AnalyzeResponse(BaseModel):
     action: str = Field(..., description="Detected action type")
     risk_level: str = Field(..., description="LOW | MEDIUM | HIGH")
     recoverability: str = Field(..., description="REVERSIBLE | CONDITIONAL | IRREVERSIBLE")
     pressure_signals: List[str] = Field(default_factory=list, description="List of persuasion signals")
-    explanation: str = Field(..., description="Human-readable explanation")
+    explanation: str = Field(..., description="Human-readable explanation (from LLM when available, else engine)")
+    detected_data: List[str] = Field(default_factory=list, description="Rule triggers: e.g. Authentication code, External recipient")
+    suggestion_rewrite: Optional[str] = Field(None, description="Safer alternative phrasing when risk is not SAFE")
+    context: Optional[SecurityContext] = Field(None, description="Structured situation understanding for popup")

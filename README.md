@@ -1,168 +1,116 @@
-Replace the contents of README.md with the following:
+# 🐤 CanaryGate
 
-# PhishPup
-
-## Overview
-
-PhishPup is a send-time decision verification assistant for email communication.
-
-The system evaluates the real-world consequences of a message before it is sent. It does not block messages and does not classify conversations as scams. Instead, it analyzes the action performed by the message and provides a structured decision report.
-
-PhishPup functions as a consequence validation layer comparable to how spell-check validates text.
-
-The application runs as a local web interface for development and as a Chrome extension integrated with Gmail for the primary user experience.
+**Safety for communication.**  
+Clear guidance before you send. Risk visibility without surveillance.
 
 ---
 
-## Problem
+## What it does
 
-Digital communication tools prioritize speed while many actions performed within conversations are irreversible. Common issues include:
+CanaryGate is a **pre-send safety checkpoint** for email. Before a message is sent, it answers one question:
 
-* sharing authentication codes or credentials
-* sending sensitive information externally
-* agreeing to commitments without verification
-* approving requests under urgency or authority pressure
+> *What happens if this is sent?*
 
-Many security and operational incidents originate from human decisions rather than system compromise. Current communication platforms do not validate the consequences of outgoing messages.
+- **In Gmail:** A Chrome extension analyzes your draft and thread, then shows **SAFE**, **REVIEW**, or **STOP_VERIFY** with a plain-English explanation and “Situation Understanding” (e.g. *“You’re replying to someone outside your org who’s asking for a verification code”*). For risky replies, it suggests a safer alternative. You still choose: send, edit, or cancel.
+- **For you:** A private **protection history** — how many messages you’ve had checked, how often you were warned, and how many risky sends you avoided. No one else sees your content.
+- **For the org:** A **manager dashboard** with company risk level, a live **exposure feed** (“Credential sharing attempts increasing”, “Unusual outbound volume”), and incident-style cards — patterns and risk only, no email bodies and no names by default.
 
-PhishPup introduces a decision checkpoint prior to message transmission.
-
----
-
-## Core Concept
-
-PhishPup evaluates the action a message performs rather than attempting to detect scams.
-
-Primary question:
-
-If this message is sent, what action occurs and what consequence follows?
-
-The analysis considers four dimensions:
-
-* Intent: the action expressed in the message
-* Context: prior conversation content
-* Destination: message recipients
-* Payload: information being transmitted
-
-The system produces a deterministic decision report rather than a probability score.
+We don’t block. We don’t classify “phish or not.” We **explain the consequence** and **record the decision** so people and companies can see human-layer risk without surveillance.
 
 ---
 
-## Context Understanding
+## Why we built it
 
-An optional AI layer converts a user-provided situation description into structured context including category, sensitivity, and focus areas.
-
-The AI component does not determine safety outcomes. Final decisions are produced exclusively by the deterministic reasoning engine.
-
-AI provides semantic understanding. Rules enforce consistent consequences.
+- **Most incidents are human decisions** — sharing a code, sending money, clicking under pressure — not just “getting hacked.”
+- **Tools today are after the fact** (detect the breach) or **all-or-nothing** (block/allow). There’s no lightweight “pause and think” layer.
+- **CanaryGate adds that layer:** one clear checkpoint before send, with explanations and optional safer wording, and a record of what people did. Rules decide; optional AI only makes the copy clearer.
 
 ---
 
-## User Workflow (Gmail Extension)
+## Tech stack
 
-1. Compose an email in Gmail
-2. Open the PhishPup extension
-3. Optionally describe the communication context
-4. Select Check Email
-5. Review the generated decision report
-6. Send or modify the message
-
----
-
-## Decision Results
-
-PhishPup returns one of three outcomes:
-
-SAFE
-The message appears consistent with context.
-
-CHECK
-The message may contain a potential issue requiring review.
-
-STOP_VERIFY
-The message may cause irreversible consequences and should be verified through an independent channel.
-
-Results are deterministic and reproducible.
+| Layer        | Stack |
+|-------------|--------|
+| **Frontend** | React, Vite, CSS |
+| **Backend**  | FastAPI, Python 3, Pydantic |
+| **Engine**   | Deterministic rule-based (no ML in the decision path) |
+| **Extension**| Chrome Manifest V3, vanilla JS |
+| **Storage**  | In-memory (no DB for the demo) |
 
 ---
 
-## Example
+## Quick start
 
-Message:
-Here is the verification code: 482193
+**1. Backend**
 
-Result:
-STOP_VERIFY
-Account access transfer is being performed
-The request exhibits urgency
-The action is irreversible
-Verification should occur through the official application
-
----
-
-## Architecture
-
-Frontend: React demonstration interface
-Backend: FastAPI service
-Engine: deterministic rule-based reasoning system
-AI layer: optional context interpreter
-Integration: Chrome extension for Gmail
-
-### API
-
-POST /analyze
-
-Request:
-{
-conversation: string,
-draft: string,
-metadata: {
-recipients: string[],
-source: string,
-attachments: [{ name: string, type: string }],
-interpreted_context: object
-}
-}
-
----
-
-## Reasoning Engine
-
-Processing pipeline:
-
-1. Extract intended action
-2. Detect persuasion signals
-3. Evaluate recoverability
-4. Determine outcome severity
-5. Produce structured explanation
-
-Identical inputs always produce identical outputs.
-
----
-
-## Running Locally
-
-Backend:
+```bash
 uvicorn main:app --reload
+```
 
-Frontend demo:
-cd frontend
-npm run dev
+**2. Frontend**
 
-Chrome extension:
-Load the phishpup-extension directory using chrome://extensions developer mode.
+```bash
+cd frontend && npm install && npm run dev
+```
+
+Open **http://localhost:5173** — log in as **Employee** or **Manager** (no password; role is stored in the browser).
+
+**3. Chrome extension (optional, for real Gmail check-before-send)**
+
+- Open `chrome://extensions`, enable **Developer mode**, **Load unpacked**
+- Select the `phishpup-extension` folder
+- Ensure the backend is running on port 8000; the extension calls `http://localhost:8000/analyze`
 
 ---
 
-## Future Direction
+## Docs
 
-* automatic send interception
-* attachment awareness
-* calendar-aware commitments
-* messaging platform integrations
+- [APPLICATION_DESCRIPTION.md](APPLICATION_DESCRIPTION.md) — Product summary and one-liner.
+- [docs/](docs/) — Internal docs: architecture, requirements, app state, system workflow.
 
 ---
 
-## Summary
+## Project structure
 
-PhishPup provides deterministic verification of communication actions prior to transmission.
+```
+├── main.py              # FastAPI app, CORS, /health
+├── api/routes.py        # /analyze, /decision, /decisions, /risk-feed
+├── core/engine.py      # Deterministic action + risk engine
+├── services/           # analyze, context, explanation, risk_narrative, data_checker
+├── frontend/           # React app (Landing, Employee view, Manager dashboard)
+└── phishpup-extension/ # Gmail extension (popup + content script)
+```
+
+---
+
+## API at a glance
+
+| Method | Path | Purpose |
+|--------|------|---------|
+| `POST` | `/analyze` | Analyze draft + conversation → action, risk_level, explanation, suggestion_rewrite, context |
+| `POST` | `/decision` | Record user decision (sent / edited / cancelled) |
+| `GET`  | `/decisions` | All decisions (newest first) |
+| `GET`  | `/risk-feed` | Risk narratives for the exposure feed |
+
+No auth required for the demo.
+
+---
+
+## Screenshots
+
+*Add a screenshot of the landing page, extension popup, and manager dashboard here for maximum hackathon impact.*
+
+---
+
+## What’s next
+
+- More channels (Slack, Outlook)
+- Attachment and link depth analysis
+- Policy-driven thresholds and alerts
+- Optional SSO and audit log export
+
+---
+
+**CanaryGate** — Safety for communication. No surveillance.
+
+*Built for [Your Hackathon Name].*

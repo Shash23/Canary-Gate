@@ -1,5 +1,5 @@
 """
-PhishPup FastAPI application.
+CanaryGate FastAPI application.
 Prod: serves POST /analyze and static frontend at /. SPA fallback for unknown GET.
 Dev (ENV=dev): API only; no static files. Use Vite dev server for frontend with hot reload.
 """
@@ -16,7 +16,7 @@ from api.routes import router as analyze_router
 
 ENVIRONMENT = os.getenv("ENV", "dev")
 
-app = FastAPI(title="PhishPup", description="Behavioral risk analysis for messages")
+app = FastAPI(title="CanaryGate", description="Behavioral risk analysis for messages")
 
 app.add_middleware(
     CORSMiddleware,

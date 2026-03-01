@@ -1,1 +1,1 @@
-# Core reasoning engine for PhishPup behavioral analysis.
+# Core reasoning engine for CanaryGate behavioral analysis.

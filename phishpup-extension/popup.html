@@ -2,22 +2,34 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>PhishPup</title>
+  <title>CanaryGate Security Check</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <header class="header">
-    <h1>PhishPup</h1>
-    <p class="subtitle">Check before you send</p>
+    <h1>CanaryGate Security Check</h1>
+    <p class="subtitle">Outgoing communication risk assessment</p>
   </header>
 
   <div class="card">
     <div id="statusBadge" class="status-badge risk-none"></div>
     <p id="summaryText" class="summary"></p>
     <p id="explanationText" class="explanation"></p>
+    <div id="contextSection" class="context-section">
+      <h4>Situation Understanding</h4>
+      <div id="contextSummary"></div>
+    </div>
+    <div id="suggestionSection" class="suggestion-section">
+      <h4>Safer alternative</h4>
+      <p id="suggestionText" class="suggestion-text"></p>
+    </div>
   </div>
 
-  <button id="check">Check Email</button>
+  <button id="check">Analyze Message</button>
+  <div id="detectedDataSection" class="detected-data-section">
+    <h4>Detected Data</h4>
+    <ul id="detectedDataList"></ul>
+  </div>
   <button id="toggleDetails">Show Details</button>
 
   <div id="detailsSection" class="details-section">

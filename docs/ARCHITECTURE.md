@@ -1,8 +1,8 @@
-# PhishPup — Application & Architecture Summary
+# CanaryGate — Application & Architecture Summary
 
-## What PhishPup Does
+## What CanaryGate Does
 
-PhishPup is a **decision-verification assistant for communication**. It runs **before** you send a message and explains what your message *does in the real world* — not just what it says.
+CanaryGate is a **decision-verification assistant for communication**. It runs **before** you send a message and explains what your message *does in the real world* — not just what it says.
 
 - **It does not block you** — it advises; the human decides.
 - **It does not classify “scam or not”** — it evaluates the *action* the message performs (e.g. share code, send money, grant access, click link, make commitment).

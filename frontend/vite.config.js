@@ -9,6 +9,9 @@ export default defineConfig({
     proxy: {
       '/analyze': 'http://127.0.0.1:8000',
       '/interpret_context': 'http://127.0.0.1:8000',
+      '/decision': 'http://127.0.0.1:8000',
+      '/decisions': 'http://127.0.0.1:8000',
+      '/risk-feed': 'http://127.0.0.1:8000',
       '/health': 'http://127.0.0.1:8000',
     },
   },

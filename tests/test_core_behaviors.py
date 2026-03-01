@@ -1,5 +1,5 @@
 """
-Core safety tests: product-level guarantees for PhishPup decisions.
+Core safety tests: product-level guarantees for CanaryGate decisions.
 Given conversation + draft + context, the decision must stay consistent.
 """
 import pytest

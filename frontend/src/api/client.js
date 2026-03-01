@@ -47,3 +47,29 @@ export async function analyzeMessage(text, metadata = {}) {
   }
   return res.json();
 }
+
+/**
+ * Fetches all recorded decisions from GET /decisions (newest first).
+ * @returns {Promise<Array<{ timestamp, user_identifier, draft, conversation, recipients, detected_action, risk_level, pressure_signals, explanation, user_decision }>>}
+ */
+export async function fetchDecisions() {
+  const res = await fetch('/decisions');
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(err || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+/**
+ * Fetches risk narratives from GET /risk-feed (newest first).
+ * @returns {Promise<Array<{ id, severity, title, description, supporting_metrics, timestamp }>>}
+ */
+export async function fetchRiskFeed() {
+  const res = await fetch('/risk-feed');
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(err || `HTTP ${res.status}`);
+  }
+  return res.json();
+}

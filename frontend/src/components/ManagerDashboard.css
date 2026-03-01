@@ -1,0 +1,320 @@
+.manager-view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+}
+
+.manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.manager-brand {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.manager-logout {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #475569;
+  cursor: pointer;
+}
+
+.manager-logout:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.manager-main {
+  flex: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  width: 100%;
+}
+
+.manager-disclaimer {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0 0 1.5rem 0;
+}
+
+.manager-loading,
+.manager-error {
+  margin: 0;
+}
+
+.manager-error {
+  color: #b91c1c;
+}
+
+/* Tier 1 */
+.manager-tier1 {
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.manager-tier1-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.manager-risk-badge {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.manager-risk-badge.risk-high {
+  background: #fdecea;
+  color: #b42318;
+}
+
+.manager-risk-badge.risk-medium {
+  background: #fff4e5;
+  color: #b45309;
+}
+
+.manager-risk-badge.risk-low {
+  background: #e6f4ea;
+  color: #1a7f37;
+}
+
+.manager-tier1-reason {
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.manager-breakdown {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.manager-breakdown dt {
+  font-weight: 600;
+  color: #475569;
+  margin-top: 0.5rem;
+}
+
+.manager-breakdown dt:first-child {
+  margin-top: 0;
+}
+
+.manager-breakdown dd {
+  margin: 0.15rem 0 0 0;
+}
+
+/* Tier 2 */
+.manager-tier2 {
+  margin-bottom: 1.5rem;
+}
+
+.manager-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 0.35rem 0;
+}
+
+.manager-tier2-hint {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0 0 1rem 0;
+}
+
+.manager-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.manager-card {
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.manager-card-high {
+  border-color: #fecaca;
+  background: #fef2f2;
+  cursor: pointer;
+}
+
+.manager-card-high:hover {
+  background: #fee2e2;
+}
+
+.manager-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+}
+
+.manager-card-dl {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.manager-card-dl dt {
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 0.35rem;
+}
+
+.manager-card-dl dt:first-child {
+  margin-top: 0;
+}
+
+.manager-card-dl dd {
+  margin: 0.1rem 0 0 0;
+}
+
+.manager-card-expand {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #b45309;
+}
+
+.manager-empty {
+  margin: 0;
+  color: #64748b;
+}
+
+/* Tier 3 — Investigation */
+.manager-investigation-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.manager-investigation {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.manager-investigation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.manager-investigation-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.manager-investigation-close {
+  padding: 0.25rem 0.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.manager-investigation-close:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.manager-investigation-notice {
+  font-size: 0.85rem;
+  color: #b45309;
+  margin: 0 0 1rem 0;
+}
+
+.manager-investigation-dl {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+}
+
+.manager-investigation-dl dt {
+  font-weight: 600;
+  margin-top: 0.5rem;
+  color: #475569;
+}
+
+.manager-investigation-dl dt:first-child {
+  margin-top: 0;
+}
+
+.manager-investigation-dl dd {
+  margin: 0.15rem 0 0 0;
+}
+
+.manager-investigation h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 1rem 0 0.35rem 0;
+}
+
+.manager-investigation-summary {
+  margin: 0 0 1rem 0;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.manager-investigation-summary p {
+  margin: 0 0 0.5rem 0;
+}
+
+.manager-investigation-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.manager-investigation-pre {
+  margin: 0 0 0.5rem 0;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  background: #f8fafc;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

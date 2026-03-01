@@ -1,1 +1,1 @@
-# PhishPup behavioral test suite.
+# CanaryGate behavioral test suite.

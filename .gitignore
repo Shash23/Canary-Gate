@@ -65,3 +65,7 @@ Thumbs.db
 # Local / temp
 *.local
 .cache/
+
+# Root-level asset duplicates (canonical copies in frontend/public/)
+/logo.png
+/justbird.png

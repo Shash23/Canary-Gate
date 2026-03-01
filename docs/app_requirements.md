@@ -1,4 +1,4 @@
-# PhishPup — Web Application PRD (React Version)
+# CanaryGate — Web Application PRD (React Version)
 
 ## 1. Goal
 
@@ -90,7 +90,7 @@ Response:
 ### Page Layout
 
 Centered container
-Title PhishPup
+Title CanaryGate
 Large message input box
 Analyze button
 Example buttons

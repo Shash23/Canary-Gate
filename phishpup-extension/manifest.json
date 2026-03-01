@@ -1,14 +1,21 @@
 {
   "manifest_version": 3,
-  "name": "PhishPup",
+  "name": "CanaryGate",
   "version": "1.0",
   "description": "Send-time decision verification for email",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": [
     "https://mail.google.com/*",
-    "http://localhost:8000/*"
+    "http://localhost:8000/*",
+    "http://localhost:5173/*",
+    "http://127.0.0.1:5173/*"
   ],
-  "action": {
-    "default_popup": "popup.html"
-  }
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:5173/*", "http://127.0.0.1:5173/*"],
+      "js": ["sync-user-id.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": { "default_popup": "popup.html" }
 }
